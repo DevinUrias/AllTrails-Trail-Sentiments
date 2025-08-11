@@ -61,6 +61,8 @@ This analysis can be reproduced for any trail with available reviews by followin
 
 Scrape the Data you will be using via Webscraper.io or another scraping tool. Ensure your export includes: Date, Content, Features, Rating.
 
+![telegram-cloud-photo-size-1-4958686184893166529-y](https://github.com/user-attachments/assets/6fc48fdf-3960-49c2-aef3-b0f2ddf79aeb)
+
 Clean & Prepare the Data. We did this step by giving the file to the LLM and asking it to fix any formatting issues it could see at first glance. It's response was to parse the date to datetime format rather than just the string it was saved as, remove unnecessary rows, and to convert the listed features into a much more usable list. Cleaned data should be saved in the "Data" folder as "Cleaned_Trail_Reviews.csv".
 
 Optional: Once the data is ready to be used an LLM can be consulted to expand on the category lexicon to insure more accuracy in the analysis. Relevant lists can be found in the "config" folder for editing.
