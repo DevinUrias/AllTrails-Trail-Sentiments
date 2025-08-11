@@ -19,8 +19,6 @@ While the analysis here focuses on one trail (Guadalupe Peak Trail), the workflo
 
 ## Data
 
-Dependencies: Required libararies are numpy, pandas, matplotlib, re, and optional but highly recommended to install is vaderSentiment.
-
 Source: Reviews scraped from AllTrails using the Webscraper.io browser extension
 
 Scope: 1 full year worth of reviews were scraped, totaling 589 reviews.
@@ -29,16 +27,16 @@ Scope: 1 full year worth of reviews were scraped, totaling 589 reviews.
 
 Fields gathered: Date, the review content, user-listed features, star rating
 
-Fields to be created:
-- Snippets: the specific lines used to analyze sentiment of the 4 specific target categories
-- category_sent: Sentiment scores of those specific lines for that category.
-
 Example of scraped data:
 
 ```
 Date,Content,Features,Rating,
 7/30/25,"Review text","[{""Features"":""Feature1""},{""Features"":""Feature2""},{""Features"":""Feature3""}]",5
 ```
+
+Fields to be created:
+- Snippets: the specific lines used to analyze sentiment of the 4 specific target categories
+- category_sent: Sentiment scores of those specific lines for that category.
 
 LLM Integration in the Workflow
 A Large Language Model (ChatGPT) was used not only to write code, but to directly contribute to the analysis process, including:
@@ -48,15 +46,15 @@ A Large Language Model (ChatGPT) was used not only to write code, but to directl
 - Droped incomplete rows
 - Extracted and scored sentiment by category
 - Designed regex-based keyword lexicons for category detection
-- Creating an entire starter Jupyter Notebook with structured sections and reusable functions
+<img width="657" height="121" alt="Screenshot 2025-08-11 at 6 44 31 AM" src="https://github.com/user-attachments/assets/950465d9-57a4-4359-a8c4-eb5974e1ce03" />
+- Being unable to do the sentiment analysis itself it then created an entire Jupyter Notebook with structured sections and reusable functions
 - Aided in debugging issues (e.g., unexpected sentiment scores, category extraction errors)
 - Expanded available lexicons after analyzing reviews for common unrecognized words
-- Proposed the idea of blending LLM-scored sentiment logic with fallback custom lexicons to better handle domain-specific language
-- Taught the methods used for complex aggregation and grouping logic to ensure understanding
-
-This iterative back-and-forth meant the LLM was acting as coding assistant, a domain-specific logic designer, and a teaching tool for the methods used.
+- Helped develop a method of blending LLM-scored sentiment logic with fallback custom lexicons to better handle domain-specific language
 
 ## How to Recreate
+Dependencies: Required libararies are numpy, pandas, matplotlib, re, and optional but highly recommended to install is vaderSentiment.
+
 This analysis can be reproduced for any trail with available reviews by following these steps:
 
 Scrape the Data you will be using via Webscraper.io or another scraping tool. Ensure your export includes: Date, Content, Features, Rating.
@@ -79,23 +77,19 @@ Output files will be found in the "Results" folder
 ## Insights
 Some patterns visible in this dataset include:
 <img width="1500" height="750" alt="overall_review_monthly_sentiment" src="https://github.com/user-attachments/assets/048ab97c-cc6f-460c-b0ae-02f4619a8014" />
-<img width="1500" height="750" alt="crowding_monthly_sentiment" src="https://github.com/user-attachments/assets/ea858c82-de56-4155-96d2-2f7bb5eec76f" />
-
-Views sentiment peaked in October, February, and June. October and February make sense given the cooler weather expectations, with potentially clearer skies. June then might peak as it's the middle of summer vacation. Crowding sentiment showed notable negativity in June, possibly due to that same summer traffic. Of a related note, the difficulty sentiment scores remained fairly consistent but was highest in February, perhaps implying the warming weather as winter ends encourages more novice hikers to go outside, maybe to do with new years resolutions.
-<img width="1500" height="750" alt="difficulty_monthly_sentiment" src="https://github.com/user-attachments/assets/0753ad68-7a54-4d9c-a51b-91015a05f656" />
-
-Overall review sentiment seemed to closely follow the view sentiment, suggesting scenery is a major driver of total satisfaction.
-
 <img width="1500" height="750" alt="views_monthly_sentiment" src="https://github.com/user-attachments/assets/5623849b-f842-4891-a83a-9769ab3fe79d" />
 
+There is somewhat of a similarity between overall sentiment and views sentiment scores, suggesting scenery is strongly correlated with overall satisfaction. Views sentiment peaked in October, February, and June. October and February make sense given the cooler weather expectations, with potentially clearer skies. June then might peak as it's the middle of summer vacation. Of a related note, the difficulty sentiment scores remained fairly consistent but was highest in February, perhaps implying the warming weather as winter ends encourages more novice hikers to go outside, maybe to do with new years resolutions. 
+<img width="1500" height="750" alt="difficulty_monthly_sentiment" src="https://github.com/user-attachments/assets/0753ad68-7a54-4d9c-a51b-91015a05f656" />
+
+Of interest was the realization that there might not be a strong correlation between sentiment and the rating a user gave. While the average rating was fairly consistent with little in regards to peaks or valleys, overall sentiment had noticeable peaks and valleys. It would seem that analyzing the words used really does give us more of an honest idea of the trails "true rating".
+
+<img width="3000" height="1800" alt="rating_vs_sentiment" src="https://github.com/user-attachments/assets/7b24ba2c-47b6-405b-a6fa-41b04e15ca87" />
+
+The peaks in view sentiments or overall sentiments show us opportunities for community engagement, events, or even fundraisers. Promoting tourism around these peaks would be optimal for the best visitor experiences. Likewise, a flexible reservation fee which adjusts around these times isn't unheard of and could bring more revenue to our parks system. Then too, the valleys show us opportunities for improvement of the facilities or possibly areas where a new approach might be useful. If a valley can be attributed to heat, maybe some after dark programs would benefit the park, set up some telescopes to view the stars, do a guided night time trek, or a camping oriented promotion/event. More than raw attendence numbers, you can use sentiment to delve deeper into any possible ideas.
+
 ### Future Work
-Add weekly aggregation to capture possible holiday and event-specific sentiment swings
-
-Incorporate historical weather data to correlate conditions with review sentiment
-
-Apply workflow to multiple trails to identify park-wide seasonal patterns
-
-Integrate LLMs for automatic category discovery instead of predefined lexicons
+Expanding on this project I would be interested in seeing a weekly aggregation to capture possible holiday and event-specific sentiment swings. Incorporating historical weather data to correlate conditions with review sentiment would have been my next step as well to see if any trends match with heat waves or rain. The obvious step after further fleshing out what data can be pulled is to then apply this sentiment analysis to more trails, starting to hilight park-wide seasonal patterns.
 
 #### Repository Structure
 ```
